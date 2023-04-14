@@ -1,0 +1,56 @@
+[
+  {
+    "description": "This is Mingus. He's a wonderful father to his smol pup. Confirmed 13/10, but he needs your help",
+    "good": true,
+    "name": "Mingus",
+    "photo": "https://firebasestorage.googleapis.com/v0/b/cr-workshop-rn-essentials.appspot.com/o/886736880519319552.jpg?alt=media&token=3afd169d78af4baba34684e3c6c3e387",
+    "rating": 13,
+    "avatar": "https://firebasestorage.googleapis.com/v0/b/cr-workshop-rn-essentials.appspot.com/o/886736880519319552-avatar.png?alt=media&token=c5e84dc12bb8494f809ef43d7fb3323c",
+    "id": "886736880519319552"
+  },
+  {
+    "description": "This is Derek. He's late for a dog meeting. 13/10 pet...al to the metal",
+    "good": true,
+    "name": "Derek",
+    "photo": "https://firebasestorage.googleapis.com/v0/b/cr-workshop-rn-essentials.appspot.com/o/886680336477933568.jpg?alt=media&token=554782693041440f909f02fe90c67990",
+    "rating": 13,
+    "avatar": "https://firebasestorage.googleapis.com/v0/b/cr-workshop-rn-essentials.appspot.com/o/886680336477933568-avatar.png?alt=media&token=b1dac98415c44d929f70e2f58a9fe773",
+    "id": "886680336477933568"
+  },
+  {
+    "description": "This is Roscoe. Another pupper fallen victim to spontaneous tongue ejections. Get the BlepiPen immediate. 12/10 deep breaths Roscoe",
+    "good": true,
+    "name": "Roscoe",
+    "photo": "https://firebasestorage.googleapis.com/v0/b/cr-workshop-rn-essentials.appspot.com/o/886366144734445568.jpg?alt=media&token=570f379a277d46d68396c8e147b87c3c",
+    "rating": 12,
+    "avatar": "https://firebasestorage.googleapis.com/v0/b/cr-workshop-rn-essentials.appspot.com/o/886366144734445568-avatar.png?alt=media&token=ebd5d9bdaf5f4cdb8393726c03832ccd",
+    "id": "886366144734445568"
+  },
+  {
+    "description": "This is Derek. He's late for a dog meeting. 13/10 pet...al to the metal",
+    "good": true,
+    "name": "Derek",
+    "photo": "https://firebasestorage.googleapis.com/v0/b/cr-workshop-rn-essentials.appspot.com/o/886680336477933568.jpg?alt=media&token=554782693041440f909f02fe90c67990",
+    "rating": 13,
+    "avatar": "https://firebasestorage.googleapis.com/v0/b/cr-workshop-rn-essentials.appspot.com/o/886680336477933568-avatar.png?alt=media&token=b1dac98415c44d929f70e2f58a9fe773",
+    "id": "886680336477933568"
+  },
+  {
+    "description": "This is Roscoe. Another pupper fallen victim to spontaneous tongue ejections. Get the BlepiPen immediate. 12/10 deep breaths Roscoe",
+    "good": true,
+    "name": "Roscoe",
+    "photo": "https://firebasestorage.googleapis.com/v0/b/cr-workshop-rn-essentials.appspot.com/o/886366144734445568.jpg?alt=media&token=570f379a277d46d68396c8e147b87c3c",
+    "rating": 12,
+    "avatar": "https://firebasestorage.googleapis.com/v0/b/cr-workshop-rn-essentials.appspot.com/o/886366144734445568-avatar.png?alt=media&token=ebd5d9bdaf5f4cdb8393726c03832ccd",
+    "id": "886366144734445568"
+  },
+  {
+    "description": "This is Jimbo. He will rip ur finger right h*ckin off. Other dog clearly an accessory. 12/10 pls pet with caution",
+    "good": true,
+    "name": "Jimbo",
+    "photo": "https://firebasestorage.googleapis.com/v0/b/cr-workshop-rn-essentials.appspot.com/o/885984800019947520.jpg?alt=media&token=055e1efcb69b469f834f2e5e39e69f28",
+    "rating": 12,
+    "avatar": "https://firebasestorage.googleapis.com/v0/b/cr-workshop-rn-essentials.appspot.com/o/885984800019947520-avatar.png?alt=media&token=24f6bd9434fb48b699598ae57c554fdb",
+    "id": "885984800019947520"
+  }
+]
