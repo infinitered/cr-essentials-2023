@@ -1,18 +1,57 @@
 import React from 'react'
-import { type ViewStyle, TextStyle } from 'react-native'
+import { View, type ViewStyle, TextStyle } from 'react-native'
+import { FavoritesToggle, Image, Text } from '../components'
 import { Colors, Spacing } from '../constants'
+import { useDog, useFavorites } from '../hooks'
 import DOGS_JSON from '../../assets/dogs.json'
 
 const id = DOGS_JSON[0].id
 
 export function ProfileScreen() {
-  //
-  // TASK: Implement the ProfileScreen
-  //      - it should show the dog's name, description, rating, and whether it's a favorite
-  //      - user should be able to toggle whether it's a favorite or not
-  //      - the banner should cover the top 55% of the screen
-  //      - the avatar should be positioned overlapping the banner
-  //
+  const dog = useDog(id)
+  const { description, name, photo, avatar, rating } = dog ?? {}
+
+  const { isFavorite, setFavorite } = useFavorites()
+  const isDogFavorite = isFavorite(id)
+
+  const updateFavorite = React.useCallback(
+    async (value: boolean) => {
+      await setFavorite(id, value)
+    },
+    [setFavorite]
+  )
+
+  return (
+    <View style={$container}>
+      <View style={$bannerContainer}>
+        <Image preset="banner" source={photo} contentFit={'cover'} />
+        <View style={$scrim} />
+        <View style={$avatarContainer}>
+          <Image source={avatar} preset={'avatar'} />
+        </View>
+      </View>
+      <View style={$content}>
+        <View style={$headerRow}>
+          <Text weight="bold" preset="heading" style={$heading}>
+            {name}
+          </Text>
+          <FavoritesToggle
+            onChange={updateFavorite}
+            size={'large'}
+            value={isDogFavorite}
+          />
+        </View>
+        <Text preset={'default'} style={$description}>
+          {description}
+        </Text>
+        <Text>{`Rating: ${rating}/10`}</Text>
+        <Text>{`Is this a GOOD dog?: ✅`}</Text>
+        <Text>{`Is this one of my favorites?: ${
+          isDogFavorite ? '✅' : '❌'
+        }`}</Text>
+      </View>
+    </View>
+  )
 }
 
 const $headerRow: ViewStyle = {

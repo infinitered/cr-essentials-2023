@@ -5,7 +5,7 @@ import {
   initialWindowMetrics,
   SafeAreaProvider,
 } from 'react-native-safe-area-context'
-import { ComponentLibrary } from './components/ComponentLibrary'
+import { ProfileScreen } from './screens'
 
 const App = () => {
   const [fontsLoaded] = useFonts({
@@ -22,7 +22,7 @@ const App = () => {
   return (
     <SafeAreaProvider initialMetrics={initialWindowMetrics}>
       <StatusBar style="auto" />
-      <ComponentLibrary />
+      <ProfileScreen />
     </SafeAreaProvider>
   )
 }

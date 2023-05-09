@@ -5,9 +5,9 @@ import { Dog } from '../services/types'
 
 import { Colors, Spacing } from '../constants'
 
-import { FavoriteIcon } from './FavoriteIcon'
-import { Text } from 'react-native'
+import { Text } from './Text'
 import { Image } from './Image'
+import { FavoriteIcon } from './FavoriteIcon'
 
 interface ListItemProps extends Dog {
   isFavorite: boolean
