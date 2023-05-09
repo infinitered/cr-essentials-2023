@@ -1,4 +1,4 @@
 export * from './Icon'
-export * from './LoadingIndicator'
-export * from './TextField'
-export * from './SearchBar'
+export * from './Text'
+export * from './ComponentLibrary'
+export * from './Button'
