@@ -1,18 +1,13 @@
 import React from 'react'
 import { Pressable, View, ViewStyle } from 'react-native'
-import { NativeStackScreenProps } from '@react-navigation/native-stack'
 
-import { type AppStackParamList } from '../../navigators/AppNavigator'
+import { Dog } from '../services/types'
 
-import { Dog } from '../../services/types'
+import { Colors, Spacing } from '../constants'
 
-import { Colors, Spacing } from '../../constants'
+import { FavoriteIcon, Image, Text } from './index'
 
-import { FavoriteIcon, Image, Text } from '../../components'
-
-type NavigationProps = NativeStackScreenProps<AppStackParamList, 'List'>
-
-interface ListItemProps extends Dog, NavigationProps {
+interface ListItemProps extends Dog {
   isFavorite: boolean
   setFavorite: (dog: string, isFavorite: boolean) => void
 }
@@ -22,7 +17,6 @@ export const ListItem = ({
   description,
   id,
   name,
-  navigation,
   rating,
   isFavorite,
   setFavorite,
@@ -33,7 +27,7 @@ export const ListItem = ({
 
   return (
     <Pressable
-      onPress={() => navigation.navigate('Profile', { id })}
+      onPress={() => console.log(`${name} is a good dog!`)}
       style={({ pressed }) => [
         $itemContents,
         {

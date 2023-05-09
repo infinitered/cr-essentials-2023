@@ -20,6 +20,6 @@ This repo is for the React Native Essentials Workshop (Beginner-Intermediate) at
 4. [Responding to Touches](./chapters/4-responding-to-touches.md)
 5. [Building Screens](./chapters/5-building-screens.md)
 6. [Navigation and Native Libraries](./chapters/6-navigation-and-native-libraries.md)
-7. [Filling in the List](./chapters/7-filling-the-list.md)
+
 
 

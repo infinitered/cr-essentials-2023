@@ -1,24 +1,15 @@
-import React, { useLayoutEffect } from 'react'
+import React from 'react'
 import { View, type ViewStyle, TextStyle } from 'react-native'
-import { NativeStackScreenProps } from '@react-navigation/native-stack'
 import { FavoritesToggle, Image, Text } from '../components'
-
-import { AppStackParamList } from '../navigators/AppNavigator'
 import { Colors, Spacing } from '../constants'
 import { useDog, useFavorites } from '../hooks'
+import DOGS_JSON from '../../assets/dogs.json'
 
-type ProfileScreenProps = NativeStackScreenProps<AppStackParamList, 'Profile'>
+const id = DOGS_JSON[0].id
 
-export function ProfileScreen({ route, navigation }: ProfileScreenProps) {
-  const { id } = route.params
+export function ProfileScreen() {
   const dog = useDog(id)
   const { description, name, photo, avatar, rating } = dog ?? {}
-
-  useLayoutEffect(() => {
-    navigation.setOptions({
-      headerTitle: name ?? '',
-    })
-  }, [name])
 
   const { isFavorite, setFavorite } = useFavorites()
   const isDogFavorite = isFavorite(id)
