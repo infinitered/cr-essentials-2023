@@ -1,7 +1,7 @@
 import { useState, useCallback } from 'react'
 
 import DOGS_JSON from '../../assets/dogs.json'
-import { Dog, PaginatedDogs } from '../services/types'
+import { Dog } from '../services/types'
 
 interface UseDogsReturnValue {
   dogs: Dog[]

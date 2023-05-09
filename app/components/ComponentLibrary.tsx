@@ -4,7 +4,6 @@ import { Image } from './Image'
 import React from 'react'
 import { Spacing, Colors, Shadows } from '../constants'
 import { Icon } from './Icon'
-import { FavoritesToggle } from './FavoritesToggle'
 import { Button } from './Button'
 import DOGS_JSON from '../../assets/dogs.json'
 
@@ -63,42 +62,6 @@ export function ComponentLibrary() {
         </View>
       </View>
       <View style={$divider} />
-      <Text preset={'subheading'}>FavoritesToggle</Text>
-      <View style={$component}>
-        <Text preset={'default'}>Interactivity</Text>
-        <View style={$row}>
-          <FavoritesToggle
-            onChange={setIsFavorite}
-            size={'large'}
-            value={isFavorite}
-          />
-        </View>
-      </View>
-      <View style={$component}>
-        <Text preset={'default'}>Color</Text>
-        <View style={$row}>
-          <FavoritesToggle
-            onChange={setIsFavorite}
-            size={'small'}
-            value={isFavorite}
-          />
-          <FavoritesToggle
-            onChange={setIsFavorite}
-            size={'medium'}
-            value={isFavorite}
-          />
-          <FavoritesToggle
-            onChange={setIsFavorite}
-            size={'large'}
-            value={isFavorite}
-          />
-        </View>
-        <Text preset={'default'}>States</Text>
-        <View style={$row}>
-          <FavoritesToggle onChange={() => {}} size={'medium'} value={true} />
-          <FavoritesToggle onChange={() => {}} size={'medium'} value={false} />
-        </View>
-      </View>
       <View style={$divider} />
       <Text preset={'subheading'}>Button</Text>
       <View style={$component}>

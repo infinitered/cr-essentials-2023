@@ -1,13 +1,7 @@
-import React, { useCallback } from 'react'
-import {
-  Pressable,
-  PressableProps,
-  PressableStateCallbackType,
-  StyleProp,
-  ViewStyle,
-} from 'react-native'
-
+import React from 'react'
+import { PressableProps, StyleProp, ViewStyle } from 'react-native'
 import { Colors, Spacing } from '../constants'
+import { Text } from './Text'
 
 interface IconToggleProps extends PressableProps {
   value: boolean
@@ -25,34 +19,10 @@ export const IconToggle = ({
   style: $styleProp,
   ...rest
 }: IconToggleProps) => {
-  const [value, setValue] = React.useState(false)
-
-  React.useEffect(() => {
-    if (valueIn !== value) {
-      setValue(valueIn)
-    }
-  }, [value, valueIn])
-
-  const toggle = () => {
-    setValue(!value)
-    onChange(!value)
-  }
-
-  const $buttonStyle = useCallback(
-    (state: PressableStateCallbackType) => {
-      const backgroundColor = state.pressed
-        ? Colors.tabIconDefault
-        : 'transparent'
-
-      return [$button, $styleProp, { backgroundColor }] as StyleProp<ViewStyle>
-    },
-    [$styleProp]
-  )
-  return (
-    <Pressable {...rest} onPress={toggle} style={$buttonStyle}>
-      {value ? <OnIcon /> : <OffIcon />}
-    </Pressable>
-  )
+  //
+  // TASK: Implement the IconToggle component
+  //
+  return <Text>IconToggle</Text>
 }
 
 const $button: ViewStyle = {
