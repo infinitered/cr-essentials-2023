@@ -1,11 +1,13 @@
 import React from 'react'
-import { ViewStyle } from 'react-native'
+import { Pressable, View, ViewStyle } from 'react-native'
 
 import { Dog } from '../services/types'
 
 import { Colors, Spacing } from '../constants'
 
-import { Text } from './Text'
+import { FavoriteIcon } from './FavoriteIcon'
+import { Text } from 'react-native'
+import { Image } from './Image'
 
 interface ListItemProps extends Dog {
   isFavorite: boolean
@@ -21,10 +23,49 @@ export const ListItem = ({
   isFavorite,
   setFavorite,
 }: ListItemProps) => {
-  //
-  // TASK: Implement the ListItem component to display information about a Dog
-  //
-  return <Text>ListItem</Text>
+  const toggleFavorite = React.useCallback(() => {
+    setFavorite(id, !isFavorite)
+  }, [setFavorite, isFavorite])
+
+  return (
+    <Pressable
+      onPress={() => console.log(`${name} is a good dog!`)}
+      style={({ pressed }) => [
+        $itemContents,
+        {
+          backgroundColor: pressed ? Colors.tint : Colors.background,
+        },
+      ]}
+    >
+      <View style={$itemLeft}>
+        <Image preset="avatar-small" source={avatar} />
+      </View>
+      <View style={$itemRight}>
+        <View style={$titleAndDescription}>
+          <View style={$title}>
+            <Text preset={'listItemTitle'}>{name}</Text>
+            <View>
+              <Text preset={'caption'}>{rating}/10</Text>
+            </View>
+          </View>
+          <Text preset={'listItemBody'} numberOfLines={2}>
+            {description}
+          </Text>
+        </View>
+        <Pressable
+          onPress={toggleFavorite}
+          style={({ pressed }) => [
+            favoriteToggle,
+            { backgroundColor: pressed ? Colors.tint : 'transparent' },
+          ]}
+        >
+          <View style={$favoriteIcon}>
+            <FavoriteIcon filled={isFavorite} size={24} />
+          </View>
+        </Pressable>
+      </View>
+    </Pressable>
+  )
 }
 
 const $itemContents: ViewStyle = {

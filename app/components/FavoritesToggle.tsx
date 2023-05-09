@@ -1,5 +1,7 @@
 import React from 'react'
-import { Text } from './Text'
+import { Icon } from './Icon'
+import { IconToggle } from './IconToggle'
+import { Colors } from '../constants'
 
 interface FavoritesToggleProps {
   onChange: (value: boolean) => void
@@ -11,10 +13,29 @@ export function FavoritesToggle({
   onChange,
   value,
 }: FavoritesToggleProps) {
-  //
-  // TASK: Implement the FavoritesToggle component using IconToggle as a base
-  //
-  return <Text>FavoritesToggle</Text>
+  const OnIcon = React.useCallback(
+    () => <Icon icon={'star'} size={sizes[size]} color={Colors.tintFavorite} />,
+    [size]
+  )
+  const OffIcon = React.useCallback(
+    () => (
+      <Icon
+        icon={'star-outline'}
+        size={sizes[size]}
+        color={Colors.tintFavorite}
+      />
+    ),
+    [size]
+  )
+
+  return (
+    <IconToggle
+      value={value}
+      OnIcon={OnIcon}
+      OffIcon={OffIcon}
+      onChange={onChange}
+    />
+  )
 }
 
 const sizes: Record<FavoritesToggleProps['size'], number> = {
