@@ -1,12 +1,13 @@
 import React from 'react'
-import { ViewStyle } from 'react-native'
+import { View, ViewStyle } from 'react-native'
 
 import { Text } from '../../components'
 
-export const EmptyListScreen = () => {
-  // TASK: Create an Empty List Screen component
-  return <Text>EmptyListScreen</Text>
-}
+export const EmptyListScreen = () => (
+  <View style={$emptyListContainer}>
+    <Text preset="subheading">No dogs found</Text>
+  </View>
+)
 
 const $emptyListContainer: ViewStyle = {
   alignItems: 'center',
