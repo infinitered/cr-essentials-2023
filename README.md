@@ -15,7 +15,7 @@ This repo is for the React Native Essentials Workshop (Beginner-Intermediate) at
 ## Table of Contents
 
 1. [Getting Started](./chapters/1-getting-started.md)
-
+2. [Under the Hood](./chapters/2-looking-under-the-hood.md)
 
 
 
