@@ -5,14 +5,14 @@ import {
   initialWindowMetrics,
   SafeAreaProvider,
 } from 'react-native-safe-area-context'
-import { ProfileScreen } from './screens'
+import { AppNavigator } from './navigators/AppNavigator'
 
 const App = () => {
   const [fontsLoaded] = useFonts({
-    'Lato-Bold': require('../assets/fonts/Lato-Bold.ttf'),
-    'Lato-Black': require('../assets/fonts/Lato-Black.ttf'),
-    'Lato-Regular': require('../assets/fonts/Lato-Regular.ttf'),
-    'Lato-Light': require('../assets/fonts/Lato-Light.ttf'),
+    "Lato-Bold": require('../assets/fonts/Lato-Bold.ttf'),
+    "Lato-Black": require('../assets/fonts/Lato-Black.ttf'),
+    "Lato-Regular": require('../assets/fonts/Lato-Regular.ttf'),
+    "Lato-Light": require('../assets/fonts/Lato-Light.ttf'),
   })
 
   if (!fontsLoaded) {
@@ -22,7 +22,7 @@ const App = () => {
   return (
     <SafeAreaProvider initialMetrics={initialWindowMetrics}>
       <StatusBar style="auto" />
-      <ProfileScreen />
+      <AppNavigator />
     </SafeAreaProvider>
   )
 }

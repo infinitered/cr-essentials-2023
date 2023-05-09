@@ -1,7 +1,7 @@
 import React from 'react'
 import { ViewStyle } from 'react-native'
 
-import { Text } from './Text'
+import { Text } from '../../components'
 
 export const EmptyListScreen = () => {
   // TASK: Create an Empty List Screen component
