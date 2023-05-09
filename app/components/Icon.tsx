@@ -17,10 +17,7 @@ export interface IconProps {
 }
 
 /**
- * A component to render a registered icon.
- * It is wrapped in a <TouchableOpacity /> if `onPress` is provided, otherwise a <View />.
- *
- * - [Documentation and Examples](https://github.com/infinitered/ignite/blob/master/docs/Components-Icon.md)
+ * A component to render a registered Expo icon.
  *
  * @expo/vector-icons is a library that allows you to use Ionicons and other icon sets from Expo.
  * For more information about @expo/vector-icons see: https://docs.expo.io/versions/latest/guides/icons/

@@ -46,39 +46,40 @@ export interface TextProps extends RNTextProps {
  * - [Documentation and Examples](https://github.com/infinitered/ignite/blob/master/docs/Components-Text.md)
  */
 export function Text(props: TextProps) {
-  //
-  // TASK: Implement a custom `<Text>` component
-  //
-  return <Text>Text</Text>
+  const { weight, size, text, children, style: $styleOverride, ...rest } = props
+
+  const content = text || children
+
+  const preset: Presets = $presets[props.preset] ? props.preset : 'default'
+  const $styles = [
+    $presets[preset],
+    $fontWeightStyles[weight],
+    $sizeStyles[size],
+    $styleOverride,
+  ]
+
+  return (
+    <RNText {...rest} style={$styles}>
+      {content}
+    </RNText>
+  )
 }
 
-/**
- * Styles that size the text based on the following table:
- * | Size | Font Size | Line Height |
- * |------|-----------|-------------|
- * | xxl  | 36        | 44          |
- * | xl   | 24        | 34          |
- * | lg   | 20        | 32          |
- * | md   | 18        | 26          |
- * | sm   | 16        | 24          |
- * | xs   | 14        | 21          |
- * | xxs  | 12        | 18          |
- */
 const $sizeStyles = {
-  sm: { fontSize: 16, lineHeight: 24 } as TextStyle, // .. rest of sizes here
+  xxl: { fontSize: 36, lineHeight: 44 } as TextStyle,
+  xl: { fontSize: 24, lineHeight: 34 } as TextStyle,
+  lg: { fontSize: 20, lineHeight: 32 } as TextStyle,
+  md: { fontSize: 18, lineHeight: 26 } as TextStyle,
+  sm: { fontSize: 16, lineHeight: 24 } as TextStyle,
+  xs: { fontSize: 14, lineHeight: 21 } as TextStyle,
+  xxs: { fontSize: 12, lineHeight: 18 } as TextStyle,
 }
 
-/**
- * Styles that set the font weight based on the following table:
- * | Weight  | Font Family   |
- * | ------- | ------------- |
- * | Black   | Lato-Black    |
- * | Bold    | Lato-Bold     |
- * | Regular | Lato-Regular  |
- * | Light   | Lato-Light    |
- */
 const $fontWeightStyles = {
-  regular: { fontFamily: 'Lato-Regular' } as TextStyle, // .. rest of weights here
+  black: { fontFamily: 'Lato-Black' } as TextStyle,
+  bold: { fontFamily: 'Lato-Bold' } as TextStyle,
+  regular: { fontFamily: 'Lato-Regular' } as TextStyle,
+  light: { fontFamily: 'Lato-Light' } as TextStyle,
 }
 
 const $baseStyle: StyleProp<TextStyle> = [
@@ -87,24 +88,21 @@ const $baseStyle: StyleProp<TextStyle> = [
   { color: Colors.text },
 ]
 
-/**
- * Presets that set the styles based on the following table:
- *
- * | Preset        | Size | Weight |
- * | ------------- | ---- | ------ |
- * | default       | -    | -      |
- * | heading       | xxl  | black  |
- * | subheading    | xxl  | bold   |
- * | formLabel     | -    | bold   |
- * | listHeader    | xl   | black  |
- * | listItemTitle | sm   | bold   |
- * | listItemBody  | xxs  | regular|
- * | caption       | xxs  | bold   |
- *
- * example:
- *   `heading: [$baseStyle, $sizeStyles.xxl, $fontWeightStyles.black],`
- *
- */
 const $presets = {
   default: $baseStyle,
+
+  heading: [$baseStyle, $sizeStyles.xxl, $fontWeightStyles.black],
+  subheading: [
+    $baseStyle,
+    $sizeStyles.xxl,
+    $fontWeightStyles.bold,
+  ] as StyleProp<TextStyle>,
+
+  formLabel: [$baseStyle, $fontWeightStyles.bold] as StyleProp<TextStyle>,
+
+  listHeader: [$baseStyle, $sizeStyles.xl, $fontWeightStyles.black],
+  listItemTitle: [$baseStyle, $sizeStyles.sm, $fontWeightStyles.bold],
+  listItemBody: [$baseStyle, $fontWeightStyles.regular, $sizeStyles.xxs],
+
+  caption: [$baseStyle, $fontWeightStyles.bold, $sizeStyles.xxs],
 }
