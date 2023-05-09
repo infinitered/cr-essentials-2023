@@ -21,5 +21,5 @@ This repo is for the React Native Essentials Workshop (Beginner-Intermediate) at
 5. [Building Screens](./chapters/5-building-screens.md)
 6. [Navigation and Native Libraries](./chapters/6-navigation-and-native-libraries.md)
 7. [Filling in the List](./chapters/7-filling-the-list.md)
-8. [Working with Long Lists and Paginated Data](./chapters/8-working-with-long-lists-and-paginated-data.md)
+
 
