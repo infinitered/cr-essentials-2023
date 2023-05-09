@@ -1,16 +1,10 @@
-import React, {
-  useMemo,
-  useCallback,
-  useState,
-  useEffect,
-  useLayoutEffect,
-} from 'react'
+import React, { useMemo, useCallback, useState, useLayoutEffect } from 'react'
 import { type ViewStyle, FlatList, View, ListRenderItem } from 'react-native'
 import { NativeStackScreenProps } from '@react-navigation/native-stack'
 
 import { type AppStackParamList } from '../../navigators/AppNavigator'
 
-import { LoadingIndicator, SearchBar } from '../../components'
+import { SearchBar } from '../../components'
 
 import { Spacing } from '../../constants'
 import { ListItem } from './ListItem'
@@ -31,8 +25,8 @@ export function ListScreen(props: NavigationProps) {
 
   const {
     dogs,
-    isLoading: isDogsLoading,
-    fetchNextPage,
+    // isLoading: isDogsLoading,
+    // fetchNextPage,
     searchDogs,
   } = useDogs()
 
@@ -41,11 +35,6 @@ export function ListScreen(props: NavigationProps) {
   const isFocused = useIsFocused()
 
   const { favorites, setFavorite, isFavorite, getFavorites } = useFavorites()
-
-  // fetch the favorites when the screen is focused
-  useEffect(() => {
-    getFavorites()
-  }, [isFocused, getFavorites])
 
   const displayDogs = useMemo(
     () =>
@@ -90,22 +79,25 @@ export function ListScreen(props: NavigationProps) {
         favoritesOnly={favoritesOnly}
         setFavoritesOnly={setFavoritesOnly}
       />
-      {isDogsLoading ? (
-        <LoadingIndicator />
-      ) : (
-        <FlatList
-          ListHeaderComponent={ListHeader}
-          ListHeaderComponentStyle={$headerComponentStyle}
-          ListEmptyComponent={<EmptyListScreen />}
-          contentContainerStyle={$flatListContentContainer}
-          data={displayDogs}
-          keyExtractor={(item, index) => `${index}-${item.id}-${item.name}`}
-          renderItem={renderItem}
-          onEndReachedThreshold={1}
-          onEndReached={fetchNextPage}
-          decelerationRate={'normal'}
-        />
-      )}
+      {/*
+         TASK: Use isLoading to display a loading indicator when the dogs are loading
+      */}
+      <FlatList
+        ListHeaderComponent={ListHeader}
+        ListHeaderComponentStyle={$headerComponentStyle}
+        ListEmptyComponent={<EmptyListScreen />}
+        contentContainerStyle={$flatListContentContainer}
+        data={displayDogs}
+        keyExtractor={(item, index) => `${index}-${item.id}-${item.name}`}
+        renderItem={renderItem}
+        decelerationRate={'normal'}
+        //
+        //  TASK: use the FlatList's pagination props to fetch the next page of dogs as needed
+        //      - onEndReachedThreshold
+        //      - onEndReached
+        //      - initialNumToRender
+        //
+      />
     </View>
   )
 }

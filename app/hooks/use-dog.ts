@@ -1,6 +1,6 @@
-import { useState, useEffect } from 'react'
 import { Dog } from '../services/types'
-import { dogsApi } from '../services/dogs-api'
+import DOGS_JSON from '../../assets/dogs.json'
+// import { dogsApi } from '../services/dogs-api'
 
 /**
  * Custom React hook to fetch a single dog by its ID.
@@ -10,18 +10,17 @@ import { dogsApi } from '../services/dogs-api'
  *
  * @param {string} dogId - The ID of the dog to fetch.
  * @returns {Dog | null} The fetched dog or null if not yet fetched.
- * @see {@link DogsApi} for the underlying API class.
  */
 export function useDog(dogId: string) {
-  // Initialize dog state as null
-  const [dog, setDog] = useState<Dog | null>(null)
+  //
+  // TASK: Use the dogsApi.getDog() function to fetch a single dog by its ID.
+  //     - note: you'll need a useState() hook to trigger a re-render when the dog is fetched.
+  //
 
-  // Fetch the dog by its ID when the dogId changes
-  useEffect(() => {
-    // Call the getDog method from the DogsApi class and set the dog state
-    dogsApi.getDog(dogId).then((dog) => setDog(dog))
-  }, [dogId])
+  //
+  //  TASK: Use a useEffect() hook to fetch the first page of dogs when the component mounts.
+  //
 
   // Return the dog state
-  return dog
+  return DOGS_JSON.find((dog) => dog.id === dogId)
 }

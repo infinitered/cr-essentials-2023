@@ -1,80 +1,73 @@
-import { useState, useCallback, useEffect } from 'react'
-import { PaginatedDogs, Dog } from '../services/types'
-import { dogsApi } from '../services/dogs-api'
+import { useState, useCallback } from 'react'
+
+import DOGS_JSON from '../../assets/dogs.json'
+import { Dog, PaginatedDogs } from '../services/types'
+// import { dogsApi } from '../services/dogs-api'
 
 interface UseDogsReturnValue {
   dogs: Dog[]
-  isLoading: boolean
-  fetchNextPage: () => void
+  // isLoading: boolean
+  // fetchNextPage: () => void
   searchDogs: (searchString: string) => void
 }
 
 /**
  * Custom React hook to fetch a list of dogs.
- *
- * @returns {Object} An object containing the list of dogs, a boolean indicating whether the list is currently being
- *     fetched, and functions to fetch the next page of dogs and search for dogs.
- *
- * @example
- * const { dogs, isLoading, fetchNextPage, searchDogs } = useDogs();
  */
 export function useDogs(): UseDogsReturnValue {
-  const [dogs, setDogs] = useState<PaginatedDogs>({
-    dogs: [],
-    totalPages: 0,
-    currentPage: 0,
-  })
-
-  const [isLoading, setIsLoading] = useState(false)
-  const { getDogs } = dogsApi
+  const [dogs, setDogs] = useState<Dog[]>(DOGS_JSON)
 
   /**
-   * Fetches the next page of dogs using the `getDogs` function and concatenates the new dogs to the existing dogs list.
-   * @returns {void}
+   * Custom React hook to fetch a list of dogs.
+   *
+   * @returns {Object} An object containing the list of dogs, a boolean indicating whether the list is currently being
+   *     fetched, and functions to fetch the next page of dogs and search for dogs.
+   *
+   * @example
    */
-  const fetchNextPage = useCallback(async (): Promise<void> => {
-    const { currentPage, totalPages } = dogs
-    if (currentPage < totalPages) {
-      // Call the getDogs method with the next page number and concatenate the new dogs to the existing dogs list
-      const newDogs = await getDogs({ page: currentPage + 1 })
-      setDogs({ ...newDogs, dogs: [...dogs.dogs, ...newDogs.dogs] })
-      setIsLoading(false)
-    }
-  }, [dogs, getDogs])
-
-  /**
-   * Calls the getDogs API with the given search string and updates the state with the new dogs fetched.
-   */
-  const searchDogs = useCallback(
-    async (searchString: string) => {
-      setIsLoading(true)
-      await dogsApi.searchDogs(searchString)
-      setIsLoading(false)
-    },
-    [getDogs]
-  )
-
-  useEffect(() => {
-    /**
-     * Fetches the first page of dogs when the component mounts.
-     */
-    async function fetchData() {
-      setIsLoading(true)
-      const newDogs = await getDogs({})
-      setDogs({
-        ...newDogs,
-        dogs: [...dogs.dogs, ...newDogs.dogs],
-      })
-      setIsLoading(false)
-    }
-
-    fetchData()
+  const getDogs = useCallback((): PaginatedDogs => {
+    //
+    // Use dogsApi.getDogs() to fetch the first page of dogs.
+    //
+    throw new Error('Not implemented')
   }, [])
 
+  const fetchNextPage = useCallback(() => {
+    //
+    // use dogsApi.getDogs() to fetch the next page of dogs, by passing page and limit params.
+    //
+    throw new Error('Not implemented')
+  }, [])
+
+  /**
+   * If a search string is provided, filters the list of dogs by name. Otherwise, resets the list of dogs to the
+   * original list.
+   * @param {string} searchString - The search string to be passed to the API.
+   * @returns {void}
+   */
+  const searchDogs = useCallback((searchString: string) => {
+    //
+    //  TASK: Use the dogsApi.searchDogs() function to search for dogs by name. If the search string is empty, call getDogs().
+    //
+    if (searchString.trim() === '') {
+      setDogs(DOGS_JSON)
+      return
+    }
+
+    const filteredDogs = DOGS_JSON.filter((dog) =>
+      dog.name.toLowerCase().includes(searchString.trim().toLowerCase())
+    )
+    setDogs(filteredDogs)
+  }, [])
+
+  //
+  //  TASK: Use the useEffect() hook to fetch the first page of dogs when the component mounts.
+  //
+
   return {
-    dogs: dogs.dogs,
-    isLoading,
-    fetchNextPage,
+    dogs,
+    // isLoading,
+    // fetchNextPage,
     searchDogs,
   }
 }
