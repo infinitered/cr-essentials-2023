@@ -17,8 +17,6 @@ This repo is for the React Native Essentials Workshop (Beginner-Intermediate) at
 1. [Getting Started](./chapters/1-getting-started.md)
 2. [Under the Hood](./chapters/2-looking-under-the-hood.md)
 3. [Making Stuff Look Good](./chapters/3-making-stuff-look-good.md)
-4. [Responding to Touches](./chapters/4-responding-to-touches.md)
-5. [Building Screens](./chapters/5-building-screens.md)
 
 
 
