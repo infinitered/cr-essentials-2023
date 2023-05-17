@@ -1,6 +1,6 @@
-import { useState, useCallback } from 'react'
+import { useState, useCallback, useEffect } from 'react'
 import { Favorites, Dog } from '../services/types'
-// import { dogsApi } from '../services/dogs-api'
+import { dogsApi } from '../services/dogs-api'
 
 /**
  * Custom React hook to fetch and manage a user's list of favorite dogs.
@@ -9,20 +9,15 @@ import { Favorites, Dog } from '../services/types'
  */
 export function useFavorites() {
   const [favorites, setFavorites] = useState<Favorites>([])
-  //
-  // TASK: Use the isLoading state variable to indicate whether the favorites are being fetched or not.
-  //
   const [isLoading, setIsLoading] = useState(false)
 
   /**
    * Fetches the list of favorite dogs from the server and updates the state.
-   * @example
-   *  getFavorites()
    */
   const getFavorites = useCallback(async () => {
-    //
-    // TASK: Use dogsApi.getFavorites() to fetch the list of favorite dogs.
-    //
+    const favorites = await dogsApi.getFavorites()
+    setFavorites(favorites)
+    setIsLoading(false)
   }, [])
 
   /**
@@ -34,17 +29,15 @@ export function useFavorites() {
    *   // remove the dog from the list of favorites
    *   setFavorite("892177421306343426", false)
    */
-  const setFavorite = useCallback((dog: string, isFavorite: boolean) => {
-    //
-    // TASK: Use dogsApi.setFavorite() to set a dog as a favorite or remove it from the list of favorite dogs.
-    //       - note: dogsApi.setFavorite returns the updated list of favorites
-    //
-    const newFavorites = favorites.filter((favorite) => favorite !== dog)
-    if (isFavorite) {
-      newFavorites.push(dog)
-    }
-    setFavorites(newFavorites)
-  }, [])
+  const setFavorite = useCallback(
+    async (dog: Dog['id'], isFavorite: boolean) => {
+      const result = await dogsApi.setFavorite(dog, isFavorite)
+      setFavorites(result.favorites)
+      return result.isFavorite
+    },
+
+    [getFavorites]
+  )
 
   /**
    * Checks if a dog is a favorite.
@@ -57,9 +50,11 @@ export function useFavorites() {
     [favorites]
   )
 
-  //
-  // TASK: Use a useEffect() hook to fetch the list of favorites when the component mounts.
-  //
+  useEffect(() => {
+    setIsLoading(true)
+    getFavorites()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
 
   return {
     favorites,

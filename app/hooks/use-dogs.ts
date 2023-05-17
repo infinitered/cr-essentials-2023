@@ -1,73 +1,80 @@
-import { useState, useCallback } from 'react'
-
-import DOGS_JSON from '../../assets/dogs.json'
-import { Dog, PaginatedDogs } from '../services/types'
-// import { dogsApi } from '../services/dogs-api'
+import { useState, useCallback, useEffect } from 'react'
+import { PaginatedDogs } from '../services/types'
+import { dogsApi } from '../services/dogs-api'
 
 interface UseDogsReturnValue {
-  dogs: Dog[]
-  // isLoading: boolean
-  // fetchNextPage: () => void
+  dogs: PaginatedDogs
+  isLoading: boolean
+  fetchNextPage: () => void
   searchDogs: (searchString: string) => void
 }
 
 /**
  * Custom React hook to fetch a list of dogs.
+ *
+ * @returns {Object} An object containing the list of dogs, a boolean indicating whether the list is currently being
+ *     fetched, and functions to fetch the next page of dogs and search for dogs.
+ *
+ * @example
+ * const { dogs, isLoading, fetchNextPage, searchDogs } = useDogs();
  */
 export function useDogs(): UseDogsReturnValue {
-  const [dogs, setDogs] = useState<Dog[]>(DOGS_JSON)
+  const [dogs, setDogs] = useState<PaginatedDogs>({
+    dogs: [],
+    totalPages: 0,
+    currentPage: 0,
+  })
+
+  const [isLoading, setIsLoading] = useState(false)
+  const { getDogs } = dogsApi
 
   /**
-   * Custom React hook to fetch a list of dogs.
-   *
-   * @returns {Object} An object containing the list of dogs, a boolean indicating whether the list is currently being
-   *     fetched, and functions to fetch the next page of dogs and search for dogs.
-   *
-   * @example
+   * Fetches the next page of dogs using the `getDogs` function and concatenates the new dogs to the existing dogs list.
+   * @returns {void}
    */
-  const getDogs = useCallback((): PaginatedDogs => {
-    //
-    // Use dogsApi.getDogs() to fetch the first page of dogs.
-    //
-    throw new Error('Not implemented')
-  }, [])
-
   const fetchNextPage = useCallback(() => {
-    //
-    // use dogsApi.getDogs() to fetch the next page of dogs, by passing page and limit params.
-    //
-    throw new Error('Not implemented')
-  }, [])
+    const { currentPage, totalPages } = dogs
+    if (currentPage < totalPages) {
+      // Call the getDogs method with the next page number and concatenate the new dogs to the existing dogs list
+      getDogs({ page: currentPage + 1 }).then((newDogs) => {
+        setDogs({ ...newDogs, dogs: [...dogs.dogs, ...newDogs.dogs] })
+        setIsLoading(false)
+      })
+    }
+  }, [dogs, getDogs])
 
   /**
-   * If a search string is provided, filters the list of dogs by name. Otherwise, resets the list of dogs to the
-   * original list.
+   * Calls the getDogs API with the given search string and updates the state with the new dogs fetched.
    * @param {string} searchString - The search string to be passed to the API.
    * @returns {void}
    */
-  const searchDogs = useCallback((searchString: string) => {
-    //
-    //  TASK: Use the dogsApi.searchDogs() function to search for dogs by name. If the search string is empty, call getDogs().
-    //
-    if (searchString.trim() === '') {
-      setDogs(DOGS_JSON)
-      return
-    }
+  const searchDogs = useCallback(
+    (searchString: string) => {
+      setIsLoading(true)
+      getDogs({ searchString }).then((newDogs) => {
+        setDogs({ ...newDogs })
+        setIsLoading(false)
+      })
+    },
+    [getDogs]
+  )
 
-    const filteredDogs = DOGS_JSON.filter((dog) =>
-      dog.name.toLowerCase().includes(searchString.trim().toLowerCase())
-    )
-    setDogs(filteredDogs)
+  // Fetch the first page of dogs when the component mounts
+  useEffect(() => {
+    setIsLoading(true)
+    getDogs({}).then((newDogs) => {
+      setDogs({
+        ...newDogs,
+        dogs: [...dogs.dogs, ...newDogs.dogs],
+      })
+      setIsLoading(false)
+    })
   }, [])
-
-  //
-  //  TASK: Use the useEffect() hook to fetch the first page of dogs when the component mounts.
-  //
 
   return {
     dogs,
-    // isLoading,
-    // fetchNextPage,
+    isLoading,
+    fetchNextPage,
     searchDogs,
   }
 }
